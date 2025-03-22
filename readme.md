@@ -2,7 +2,7 @@
 
 ### Installation
 ```
-conda create -n aav -f envrionments.yml
+conda create -n aav -f environments.yml
 ```
 
 ### preprocess

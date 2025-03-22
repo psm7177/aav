@@ -1,29 +1,17 @@
-import pandas as pd
 import torch
-import math
 import torch.nn as nn
 import matplotlib.pyplot as plt
-from torch.utils.data import DataLoader, random_split
-
+from torch.utils.data import DataLoader
 from tqdm import tqdm
 from sklearn.metrics import r2_score
 
-from dataset import AAVDataset
+from dataset import get_dataset
 from model.aa_model import get_model
 
 
 def main():
     # 데이터셋 & DataLoader 설정
-    csv_file = "production.csv"
-    dataset = AAVDataset(csv_file)
-    train_size = int(0.5 * len(dataset))
-    test_size = len(dataset) - train_size
-
-    torch.manual_seed(42)
-    if torch.cuda.is_available():
-        torch.cuda.manual_seed_all(42)
-
-    train_dataset, test_dataset = random_split(dataset, [train_size, test_size])
+    train_dataset, test_dataset = get_dataset()
     train_loader = DataLoader(train_dataset, batch_size=1024, shuffle=True)
     test_loader = DataLoader(test_dataset, batch_size=1024, shuffle=False)
 

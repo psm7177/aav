@@ -29,3 +29,14 @@ class AAVDataset(Dataset):
 
     def __getitem__(self, idx):
         return self.X[idx], self.y[idx]
+
+def get_dataset():
+    csv_file = "production.csv"
+    dataset = AAVDataset(csv_file)
+    train_size = int(0.5 * len(dataset))
+    test_size = len(dataset) - train_size
+
+    generator = torch.Generator().manual_seed(42)
+
+    train_dataset, test_dataset = torch.utils.data.random_split(dataset, [train_size, test_size], generator=generator)
+    return train_dataset, test_dataset

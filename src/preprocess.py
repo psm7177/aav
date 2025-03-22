@@ -17,7 +17,7 @@ def main():
         
         dfs.append(df)
         
-    df = pd.concat(dfs, ignore_index=True)
+    df = pd.concat(dfs, ignore_index=False)
     df.to_csv("production.csv")
 
 if __name__ == '__main__':

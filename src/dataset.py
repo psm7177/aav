@@ -12,6 +12,9 @@ def encode_sequence(seq, max_len):
     encoded += [0] * (max_len - len(encoded))
     return encoded[:max_len]
 
+def decode_sequence(encoded_seq):
+    return "".join([AMINO_ACIDS[i-1] for i in encoded_seq if i > 0])
+
 class AAVDataset(Dataset):
     def __init__(self, csv_file, aa_column="AA", target_column="Production", max_len=10):
         self.data = pd.read_csv(csv_file)
